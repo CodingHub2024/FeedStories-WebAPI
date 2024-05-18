@@ -1,0 +1,6 @@
+@FeedStories.WebApi.Service_HostAddress = http://localhost:5032
+
+GET {{FeedStories.WebApi.Service_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

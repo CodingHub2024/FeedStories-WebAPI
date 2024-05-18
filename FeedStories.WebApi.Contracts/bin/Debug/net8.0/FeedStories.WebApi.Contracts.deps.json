@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "FeedStories.WebApi.Contracts/1.0.0": {
+        "runtime": {
+          "FeedStories.WebApi.Contracts.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "FeedStories.WebApi.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

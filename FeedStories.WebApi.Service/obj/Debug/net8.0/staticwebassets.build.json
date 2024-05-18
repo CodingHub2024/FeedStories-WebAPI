@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "XJj4ti+VjCRdJD8PZDbV81bCYGVfsJKyA9WBRZ1qxvs=",
+  "Source": "FeedStories.WebApi.Service",
+  "BasePath": "_content/FeedStories.WebApi.Service",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
