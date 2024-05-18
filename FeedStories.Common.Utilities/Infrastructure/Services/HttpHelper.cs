@@ -15,6 +15,13 @@ namespace FeedStories.Common.Utilities.Infrastructure
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
+        /// <summary>
+        /// GetAsync is used to get data from external service url
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException"></exception>
         public async Task<T> GetAsync<T>(string url)
         {
             try
@@ -28,6 +35,15 @@ namespace FeedStories.Common.Utilities.Infrastructure
                 // Log the exception or handle it as needed
                 throw new ApplicationException($"Error fetching data from {url}: {ex.Message}", ex);
             }
+        }
+
+        /// <summary>
+        /// SetBaseAddress method is used to reset the baseaddress URI
+        /// </summary>
+        /// <param name="baseAddress"></param>
+        public void SetBaseAddress(string baseAddress)
+        {
+            _httpClient.BaseAddress = new Uri(baseAddress);
         }
     }
 }

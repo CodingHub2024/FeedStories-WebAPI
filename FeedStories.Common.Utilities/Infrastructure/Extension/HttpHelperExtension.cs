@@ -7,9 +7,11 @@ namespace FeedStories.Common.Utilities.Infrastructure
     /// </summary>
     public static class HttpHelperExtension
     {
-        public static IServiceCollection AddHttpHelper(this IServiceCollection services)
+        public static IServiceCollection AddHttpHelper(this IServiceCollection services,string uri)
         {
-            services.AddHttpClient<IHttpHelper, HttpHelper>()
+            services.AddHttpClient<IHttpHelper, HttpHelper>(client => {
+                client.BaseAddress = new Uri(uri);
+            })
             .AddPolicyHandler(PollyPolicies.GetRetryPolicy())
             .AddPolicyHandler(PollyPolicies.GetCircuitBreakerPolicy())
             .AddPolicyHandler(PollyPolicies.GetTimeoutPolicy());

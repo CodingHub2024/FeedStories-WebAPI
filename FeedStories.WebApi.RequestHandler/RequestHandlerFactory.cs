@@ -1,5 +1,8 @@
 ﻿namespace FeedStories.WebApi.RequestHandler
 {
+    /// <summary>
+    /// RequestHandlerFactory is used as a factory clas to call respective request handler
+    /// </summary>
     public class RequestHandlerFactory : IRequestHandlerFactory
     {
         private readonly IServiceProvider _serviceProvider;

@@ -12,6 +12,11 @@ namespace FeedStories.WebApi.Service.Controllers
         {
         }
 
+
+        /// <summary>
+        /// GetStoryIds method is used to get story ids
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("GetStoryIds")]
         [ProducesResponseType(typeof(StoryIdResponse),StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
