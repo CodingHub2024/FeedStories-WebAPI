@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.Extensions.Logging;
+
 namespace FeedStories.WebApi.RequestHandler
 {
     /// <summary>
@@ -12,6 +14,11 @@ namespace FeedStories.WebApi.RequestHandler
         where TResponse : class
         where TRequestHandler : class
     {
+        private readonly ILogger<TRequestHandler> _logger;
+        public BaseRequestHandler(ILogger<TRequestHandler> logger)
+        {
+            _logger = logger;
+        }
         public abstract Task<TResponse> ProcessRequest(TRequest request);
     }
 }

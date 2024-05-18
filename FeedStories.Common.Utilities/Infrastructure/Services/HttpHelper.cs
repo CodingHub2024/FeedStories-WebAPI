@@ -24,17 +24,9 @@ namespace FeedStories.Common.Utilities.Infrastructure
         /// <exception cref="ApplicationException"></exception>
         public async Task<T> GetAsync<T>(string url)
         {
-            try
-            {
-                var response = await _httpClient.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-                return await response.Content.ReadFromJsonAsync<T>();
-            }
-            catch (Exception ex)
-            {
-                // Log the exception or handle it as needed
-                throw new ApplicationException($"Error fetching data from {url}: {ex.Message}", ex);
-            }
+            var response = await _httpClient.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<T>();
         }
 
         /// <summary>

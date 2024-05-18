@@ -1,3 +1,4 @@
+using FeedStories.Common.Middlewares;
 using FeedStories.Common.Utilities.Infrastructure;
 using FeedStories.WebApi.Contracts.Request;
 using FeedStories.WebApi.Contracts.Response;
@@ -23,14 +24,17 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseHttpsRedirection();
+}
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
+app.HandleExceptions();
+    
 app.MapControllers();
 
 app.Run();
