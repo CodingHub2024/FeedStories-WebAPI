@@ -14,7 +14,7 @@ namespace FeedStories.WebApi.RequestHandler
         where TResponse : class
         where TRequestHandler : class
     {
-        private readonly ILogger<TRequestHandler> _logger;
+        protected readonly ILogger<TRequestHandler> _logger;
         public BaseRequestHandler(ILogger<TRequestHandler> logger)
         {
             _logger = logger;

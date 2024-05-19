@@ -1,5 +1,5 @@
 using FeedStories.Common.Middlewares;
-using FeedStories.Common.Utilities.Infrastructure;
+using FeedStories.Common.Utilities.Extension;
 using FeedStories.WebApi.Contracts.Request;
 using FeedStories.WebApi.Contracts.Response;
 using FeedStories.WebApi.RequestHandler;
@@ -10,13 +10,27 @@ var builder = WebApplication.CreateBuilder(args);
 IConfiguration configuration = builder.Configuration;
 #endregion
 
+#region Configure Logging
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole(options =>
+{
+    options.LogToStandardErrorThreshold = LogLevel.Debug;
+});
+builder.Logging.AddDebug();
+#endregion
+
 #region Configure Services
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddHttpHelper(configuration["BaseURI"]);
+builder.Services.AddStoryService(configuration["BaseURI"]);
+
+#endregion
+
+#region Configure Services of RequestHandler
 builder.Services.AddSingleton<IRequestHandlerFactory, RequestHandlerFactory>();
 builder.Services.AddSingleton<IRequestHandler<EmptyRequest, StoryIdResponse>, GetStoryIdsRequestHandler>();
+builder.Services.AddSingleton<IRequestHandler<StoryIdRequest, StoryDetailResponse>, GetStoryDetailsRequestHandler>();
 #endregion
 
 #region Configure Request Processing Pipeline

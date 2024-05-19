@@ -1,9 +1,7 @@
-﻿using FeedStories.Common.Utilities.Infrastructure;
+﻿using FeedStories.Common.Utilities.Interface;
 using FeedStories.WebApi.Contracts.Request;
 using FeedStories.WebApi.Contracts.Response;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System.Security.Cryptography;
 
 namespace FeedStories.WebApi.RequestHandler.Handlers
 {
@@ -12,13 +10,10 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
     /// </summary>
     public class GetStoryIdsRequestHandler : BaseRequestHandler<EmptyRequest, StoryIdResponse, GetStoryIdsRequestHandler>
     {
-        private readonly IHttpHelper _httpHelper;
-        private readonly IConfiguration _configuration;
-        private readonly ILogger<GetStoryIdsRequestHandler> _logger;
-        public GetStoryIdsRequestHandler(ILogger<GetStoryIdsRequestHandler> logger,IHttpHelper httpHelper,IConfiguration configuration):base(logger) 
+        private readonly IStoryService _storyService;
+        public GetStoryIdsRequestHandler(ILogger<GetStoryIdsRequestHandler> logger,IStoryService storyService):base(logger) 
         {
-            _httpHelper = httpHelper;
-            _configuration = configuration;
+            _storyService = storyService;
         }
 
         public override async Task<StoryIdResponse> ProcessRequest(EmptyRequest request)
@@ -27,7 +22,7 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
 
             return new StoryIdResponse
             {
-                StoryIds = await _httpHelper.GetAsync<List<int>>(_configuration["StoryURL:GetStoriesURL"])
+                StoryIds = await _storyService.GetStoryIds()
             };
         }
     }

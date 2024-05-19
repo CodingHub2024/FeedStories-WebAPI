@@ -1,12 +1,16 @@
-﻿using Polly;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using Polly;
 using Polly.Extensions.Http;
+using Polly.Caching;
+using Polly.Caching.Memory;
 
-namespace FeedStories.Common.Utilities.Infrastructure
+namespace FeedStories.Common.Utilities.Policies
 {
     /// <summary>
-    /// PollyPolicies class is used to define fault tolerance policies for the httpclient
+    /// Policies class is used to define fault tolerance policies for the httpclient
     /// </summary>
-    public static class PollyPolicies
+    public static class HttpPolicies
     {
         /// <summary>
         /// Retry service policy
@@ -37,6 +41,17 @@ namespace FeedStories.Common.Utilities.Infrastructure
         public static IAsyncPolicy<HttpResponseMessage> GetTimeoutPolicy()
         {
             return Policy.TimeoutAsync<HttpResponseMessage>(15);
+        }
+
+        public static IAsyncPolicy<HttpResponseMessage> GetCachPolicy(IServiceCollection services)
+        {
+            var memoryCache = services.BuildServiceProvider().GetRequiredService<IMemoryCache>();
+            var cacheProvider = new MemoryCacheProvider(memoryCache);
+
+            return Policy.CacheAsync<HttpResponseMessage>(
+                cacheProvider.AsyncFor<HttpResponseMessage>(),
+                TimeSpan.FromSeconds(30) // set short expiration time for live data
+            );
         }
     }
 }

@@ -9,6 +9,7 @@
         public RequestHandlerFactory(IServiceProvider serviceProvider) {
             _serviceProvider = serviceProvider;
         }
+
         /// <summary>
         /// Factory method to create the objects of the request handlers
         /// </summary>

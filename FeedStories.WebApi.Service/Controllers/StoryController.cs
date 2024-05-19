@@ -18,11 +18,23 @@ namespace FeedStories.WebApi.Service.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetStoryIds")]
-        [ProducesResponseType(typeof(StoryIdResponse),StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(StoryIdResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetStoryIds()
         {
-            return Ok(await HandlerFactory.ProcessRequest<EmptyRequest,StoryIdResponse>(EmptyRequest.Instance));
+            return Ok(await HandlerFactory.ProcessRequest<EmptyRequest, StoryIdResponse>(EmptyRequest.Instance));
+        }
+
+        /// <summary>
+        /// GetStoryDetails method is used to get entire story details
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("GetStoryDetails")]
+        [ProducesResponseType(typeof(StoryDetailResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetStoryDetails([FromBody] StoryIdRequest request)
+        {
+            return Ok(await HandlerFactory.ProcessRequest<StoryIdRequest, StoryDetailResponse>(request));
         }
     }
 }
