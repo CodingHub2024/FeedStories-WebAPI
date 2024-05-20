@@ -1,6 +1,7 @@
 ﻿using FeedStories.Common.Utilities.Interface;
 using FeedStories.Common.Utilities.Policies;
 using FeedStories.Common.Utilities.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -11,7 +12,7 @@ namespace FeedStories.Common.Utilities.Extension
     /// </summary>
     public static class StoryServiceExtension
     {
-        public static IServiceCollection AddStoryService(this IServiceCollection services, string uri)
+        public static IServiceCollection AddStoryService(this IServiceCollection services, IConfiguration configuration, string uri)
         {
             services.AddMemoryCache();
 
@@ -19,8 +20,8 @@ namespace FeedStories.Common.Utilities.Extension
             {
                 client.BaseAddress = new Uri(uri);
             })
-            .AddPolicyHandler(HttpPolicies.GetRetryPolicy())
-            .AddPolicyHandler(HttpPolicies.GetCircuitBreakerPolicy())
+            .AddPolicyHandler(HttpPolicies.GetRetryPolicy(configuration.GetValue<int>("HttpPolicy:RetryNumber"), configuration.GetValue<int>("HttpPolicy:RetryTimeSpan")))
+            .AddPolicyHandler(HttpPolicies.GetCircuitBreakerPolicy(onfiguration.GetValue<int>("HttpPolicy:CircuitBreakerNumber"), onfiguration.GetValue<int>("HttpPolicy:CircuitBreakerWaitTimeSpan")))
             .AddPolicyHandler(HttpPolicies.GetTimeoutPolicy());
 
             services.AddSingleton<ILogger<StoryService>>(serviceProvider =>

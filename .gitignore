@@ -156,3 +156,4 @@ FeedStories.WebApi.Service.csproj.nuget.g.targets
 /.vs/FeedStories/FileContentIndex/57762100-e78e-4630-b0a7-bc61d424ea37.vsidx
 /.vs/ProjectEvaluation/feedstories.metadata.v7.bin
 /.vs/ProjectEvaluation/feedstories.projects.v7.bin
+/.vs/FeedStories/FileContentIndex/*.vsidx

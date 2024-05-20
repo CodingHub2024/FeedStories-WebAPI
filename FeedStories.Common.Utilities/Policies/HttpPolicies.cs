@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Caching;
-using Polly.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 
 namespace FeedStories.Common.Utilities.Policies
 {
@@ -16,34 +16,34 @@ namespace FeedStories.Common.Utilities.Policies
         /// Retry service policy
         /// </summary>
         /// <returns></returns>
-        public static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
+        public static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy(int retryNumber,int retryTimeSpan)
         {
             return HttpPolicyExtensions
                 .HandleTransientHttpError()
-                .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(5));
+                .WaitAndRetryAsync(retryNumber, retryAttempt => TimeSpan.FromSeconds(retryTimeSpan));
         }
 
         /// <summary>
         /// Circut breaker policy for service
         /// </summary>
         /// <returns></returns>
-        public static IAsyncPolicy<HttpResponseMessage> GetCircuitBreakerPolicy()
+        public static IAsyncPolicy<HttpResponseMessage> GetCircuitBreakerPolicy(int circuitBreakerNumber,int circuitBreakerWaitTimeSpan)
         {
             return HttpPolicyExtensions
                 .HandleTransientHttpError()
-                .CircuitBreakerAsync(5, TimeSpan.FromMinutes(10));
+                .CircuitBreakerAsync(circuitBreakerNumber, TimeSpan.FromMinutes(circuitBreakerWaitTimeSpan));
         }
 
         /// <summary>
         /// Timeout policy for service
         /// </summary>
         /// <returns></returns>
-        public static IAsyncPolicy<HttpResponseMessage> GetTimeoutPolicy()
+        public static IAsyncPolicy<HttpResponseMessage> GetTimeoutPolicy(IConfiguration configuration)
         {
             return Policy.TimeoutAsync<HttpResponseMessage>(15);
         }
 
-        public static IAsyncPolicy<HttpResponseMessage> GetCachPolicy(IServiceCollection services)
+        public static IAsyncPolicy<HttpResponseMessage> GetCachPolicy(IServiceCollection services, IConfiguration configuration)
         {
             var memoryCache = services.BuildServiceProvider().GetRequiredService<IMemoryCache>();
             var cacheProvider = new MemoryCacheProvider(memoryCache);
