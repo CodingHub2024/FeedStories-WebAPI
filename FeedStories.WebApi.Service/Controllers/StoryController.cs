@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FeedStories.WebApi.Service.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class StoryController : BaseController
     {
         public StoryController(IRequestHandlerFactory requestHandlerFactory) : base(requestHandlerFactory)
@@ -17,12 +17,12 @@ namespace FeedStories.WebApi.Service.Controllers
         /// GetStoryIds method is used to get story ids
         /// </summary>
         /// <returns></returns>
-        [HttpGet("GetStoryIds")]
+        [HttpPost("GetStoryIds")]
         [ProducesResponseType(typeof(StoryIdResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetStoryIds()
+        public async Task<IActionResult> GetStoryIds([FromBody] StoryIdRequest request)
         {
-            return Ok(await HandlerFactory.ProcessRequest<EmptyRequest, StoryIdResponse>(EmptyRequest.Instance));
+            return Ok(await HandlerFactory.ProcessRequest<StoryIdRequest, StoryIdResponse>(request));
         }
 
         /// <summary>
@@ -32,9 +32,9 @@ namespace FeedStories.WebApi.Service.Controllers
         [HttpPost("GetStoryDetails")]
         [ProducesResponseType(typeof(StoryDetailResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetStoryDetails([FromBody] StoryIdRequest request)
+        public async Task<IActionResult> GetStoryDetails([FromBody] StoryDetailRequest request)
         {
-            return Ok(await HandlerFactory.ProcessRequest<StoryIdRequest, StoryDetailResponse>(request));
+            return Ok(await HandlerFactory.ProcessRequest<StoryDetailRequest, StoryDetailResponse>(request));
         }
     }
 }

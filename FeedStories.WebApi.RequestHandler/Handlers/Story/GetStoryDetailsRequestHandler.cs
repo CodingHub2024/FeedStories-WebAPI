@@ -9,7 +9,7 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
     /// <summary>
     /// Request handler for getting story details
     /// </summary>
-    public class GetStoryDetailsRequestHandler : BaseRequestHandler<StoryIdRequest, StoryDetailResponse, GetStoryDetailsRequestHandler>
+    public class GetStoryDetailsRequestHandler : BaseRequestHandler<StoryDetailRequest, StoryDetailResponse, GetStoryDetailsRequestHandler>
     {
 
         private readonly IStoryService _storyService;
@@ -18,7 +18,7 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
             _storyService = storyService;
         }
 
-        public override async Task<StoryDetailResponse> ProcessRequest(StoryIdRequest request)
+        public override async Task<StoryDetailResponse> ProcessRequest(StoryDetailRequest request)
         {
             _logger.LogDebug($"Called {nameof(GetStoryDetailsRequestHandler)} ProcessRequest({request.StoryId})");
 

@@ -2,6 +2,7 @@
 {
     public class StoryIdRequest
     {
-        public int StoryId { get; set; }
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
     }
 }

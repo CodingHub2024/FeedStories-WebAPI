@@ -5,6 +5,7 @@
     /// </summary>
     public class StoryIdResponse
     {
+        public int TotalElements { get; set; }
         public IEnumerable<int> StoryIds { get; set; }
     }
 }

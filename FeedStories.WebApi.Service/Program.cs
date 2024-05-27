@@ -33,7 +33,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins",
         builder => builder
-            .WithOrigins("http://localhost:4200/")
+            .WithOrigins("http://localhost:4200")
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
@@ -41,8 +41,8 @@ builder.Services.AddCors(options =>
 
 #region Configure Services of RequestHandler
 builder.Services.AddSingleton<IRequestHandlerFactory, RequestHandlerFactory>();
-builder.Services.AddSingleton<IRequestHandler<EmptyRequest, StoryIdResponse>, GetStoryIdsRequestHandler>();
-builder.Services.AddSingleton<IRequestHandler<StoryIdRequest, StoryDetailResponse>, GetStoryDetailsRequestHandler>();
+builder.Services.AddSingleton<IRequestHandler<StoryIdRequest, StoryIdResponse>, GetStoryIdsRequestHandler>();
+builder.Services.AddSingleton<IRequestHandler<StoryDetailRequest, StoryDetailResponse>, GetStoryDetailsRequestHandler>();
 #endregion
 
 #region Configure Request Processing Pipeline
@@ -59,9 +59,9 @@ else
     app.UseHttpsRedirection();
 }
 
-app.HandleExceptions();
-
 app.UseCors("AllowSpecificOrigins");
+
+app.HandleExceptions();
 
 app.MapControllers();
 
