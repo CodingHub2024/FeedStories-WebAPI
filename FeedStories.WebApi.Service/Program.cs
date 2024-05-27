@@ -23,8 +23,20 @@ builder.Logging.AddDebug();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddStoryService(configuration["BaseURI"]);
+builder.Services.AddStoryService(configuration,configuration["BaseURI"]);
 
+#endregion
+
+#region Configure CORS
+// Configure CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigins",
+        builder => builder
+            .WithOrigins("http://localhost:4200/")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
 #endregion
 
 #region Configure Services of RequestHandler
@@ -48,7 +60,9 @@ else
 }
 
 app.HandleExceptions();
-    
+
+app.UseCors("AllowSpecificOrigins");
+
 app.MapControllers();
 
 app.Run();

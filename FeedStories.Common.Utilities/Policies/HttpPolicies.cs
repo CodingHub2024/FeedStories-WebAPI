@@ -4,6 +4,7 @@ using Polly;
 using Polly.Extensions.Http;
 using Polly.Caching;
 using Microsoft.Extensions.Configuration;
+using Polly.Caching.Memory;
 
 namespace FeedStories.Common.Utilities.Policies
 {
@@ -38,9 +39,9 @@ namespace FeedStories.Common.Utilities.Policies
         /// Timeout policy for service
         /// </summary>
         /// <returns></returns>
-        public static IAsyncPolicy<HttpResponseMessage> GetTimeoutPolicy(IConfiguration configuration)
+        public static IAsyncPolicy<HttpResponseMessage> GetTimeoutPolicy(int timeout)
         {
-            return Policy.TimeoutAsync<HttpResponseMessage>(15);
+            return Policy.TimeoutAsync<HttpResponseMessage>(timeout);
         }
 
         public static IAsyncPolicy<HttpResponseMessage> GetCachPolicy(IServiceCollection services, IConfiguration configuration)

@@ -21,8 +21,8 @@ namespace FeedStories.Common.Utilities.Extension
                 client.BaseAddress = new Uri(uri);
             })
             .AddPolicyHandler(HttpPolicies.GetRetryPolicy(configuration.GetValue<int>("HttpPolicy:RetryNumber"), configuration.GetValue<int>("HttpPolicy:RetryTimeSpan")))
-            .AddPolicyHandler(HttpPolicies.GetCircuitBreakerPolicy(onfiguration.GetValue<int>("HttpPolicy:CircuitBreakerNumber"), onfiguration.GetValue<int>("HttpPolicy:CircuitBreakerWaitTimeSpan")))
-            .AddPolicyHandler(HttpPolicies.GetTimeoutPolicy());
+            .AddPolicyHandler(HttpPolicies.GetCircuitBreakerPolicy(configuration.GetValue<int>("HttpPolicy:CircuitBreakerNumber"), configuration.GetValue<int>("HttpPolicy:CircuitBreakerWaitTimeSpan")))
+            .AddPolicyHandler(HttpPolicies.GetTimeoutPolicy(configuration.GetValue<int>("HttpPolicy:TimeOut")));
 
             services.AddSingleton<ILogger<StoryService>>(serviceProvider =>
             {
