@@ -1,13 +1,10 @@
-﻿
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using FeedStories.Common.Utilities.Interface;
 using FeedStories.WebApi.Contracts.Response;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Polly.Caching.Memory;
 using Polly;
-using Polly.Caching;
 
 namespace FeedStories.Common.Utilities.Services
 {
@@ -19,20 +16,25 @@ namespace FeedStories.Common.Utilities.Services
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
         ILogger<StoryService> _logger;
-        private readonly AsyncCachePolicy<StoryDetailResponse> _cachePolicy;
+        //private readonly AsyncCachePolicy<StoryDetailResponse> _cachePolicy;
+        private readonly IMemoryCache _cache;
+        private readonly TimeSpan _cacheExpiration = TimeSpan.FromMinutes(30);
+        private readonly string? _storyBaseURL = string.Empty;
 
-        public StoryService(HttpClient httpClient, IConfiguration configuration, IMemoryCache memoryCache, ILogger<StoryService> logger)
+        public StoryService(HttpClient httpClient, IConfiguration configuration, IMemoryCache cache, ILogger<StoryService> logger)
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             _configuration = configuration;
             _logger = logger;
+            _cache = cache;
+            _storyBaseURL = _configuration["StoryURL:GetStoryDetailsURL"];
 
-            var cacheProvider = new MemoryCacheProvider(memoryCache);
+            //var cacheProvider = new MemoryCacheProvider(memoryCache);
 
-            _cachePolicy = Policy.CacheAsync<StoryDetailResponse>(
-                cacheProvider.AsyncFor<StoryDetailResponse>(),
-                TimeSpan.FromSeconds(1) // Short expiration time for live data
-            );
+            //_cachePolicy = Policy.CacheAsync<StoryDetailResponse>(
+            //    cacheProvider.AsyncFor<StoryDetailResponse>(),
+            //    TimeSpan.FromSeconds(10000) // Short expiration time for live data
+            //);
         }
 
         /// <summary>
@@ -60,28 +62,32 @@ namespace FeedStories.Common.Utilities.Services
         /// </summary>
         /// <param name="storyId"></param>
         /// <returns></returns>
-        public async Task<StoryDetailResponse> GetStoryDetails(int storyId)
+        public async Task<StoryDetailResponse?> GetStoryDetails(int storyId)
         {
             var cacheKey = $"StoryDetail_{storyId}";
-            var storyDetailsURL = _configuration["StoryURL:GetStoryDetailsURL"];
 
-            if (string.IsNullOrEmpty(storyDetailsURL))
-            {
-                throw new InvalidOperationException("Story details URL template is not configured.");
-            }
-
-            storyDetailsURL = storyDetailsURL.Replace("@id", Uri.EscapeDataString(storyId.ToString()));
-
-
-            return await _cachePolicy.ExecuteAsync(async context =>
+            if (!_cache.TryGetValue(cacheKey, out StoryDetailResponse? storyDetailsResponse))
             {
                 _logger.LogInformation($"Cache miss for story ID {storyId}. Fetching from external service...");
+
+                var storyDetailsURL = _storyBaseURL;
+                storyDetailsURL = storyDetailsURL?.Replace("@id", Uri.EscapeDataString(storyId.ToString()));
+
+                if (string.IsNullOrWhiteSpace(storyDetailsURL))
+                {
+                    throw new InvalidOperationException("Story details URL template is not configured.");
+                }
 
                 var response = await _httpClient.GetAsync(storyDetailsURL);
                 response.EnsureSuccessStatusCode();
 
-                return await response.Content.ReadFromJsonAsync<StoryDetailResponse>();
-            }, new Context(cacheKey));
+                storyDetailsResponse = await response.Content.ReadFromJsonAsync<StoryDetailResponse>();
+
+                _cache.Set(cacheKey, storyDetailsResponse, _cacheExpiration);
+
+            }
+
+            return String.IsNullOrEmpty(storyDetailsResponse?.Url) ? null : storyDetailsResponse;
         }
     }
 }

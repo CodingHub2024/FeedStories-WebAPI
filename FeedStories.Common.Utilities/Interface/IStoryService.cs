@@ -8,6 +8,6 @@ namespace FeedStories.Common.Utilities.Interface
     public interface IStoryService
     {
         Task<List<int>> GetStoryIds();
-        Task<StoryDetailResponse> GetStoryDetails(int storyId);
+        Task<StoryDetailResponse?> GetStoryDetails(int storyId);
     }
 }

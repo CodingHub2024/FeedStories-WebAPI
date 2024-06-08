@@ -4,6 +4,8 @@ using FeedStories.WebApi.Contracts.Request;
 using FeedStories.WebApi.Contracts.Response;
 using FeedStories.WebApi.RequestHandler;
 using FeedStories.WebApi.RequestHandler.Handlers;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 #region Configuration
 var builder = WebApplication.CreateBuilder(args);
@@ -11,12 +13,22 @@ IConfiguration configuration = builder.Configuration;
 #endregion
 
 #region Configure Logging
-builder.Logging.ClearProviders();
-builder.Logging.AddConsole(options =>
-{
-    options.LogToStandardErrorThreshold = LogLevel.Debug;
-});
-builder.Logging.AddDebug();
+//builder.Logging.ClearProviders();
+//builder.Logging.AddConsole(options =>
+//{
+//    options.LogToStandardErrorThreshold = LogLevel.Debug;
+//});
+//builder.Logging.AddDebug();
+#endregion
+
+#region Configure Serilog
+// Configure Serilog for logging to a file
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.File("app.log", rollingInterval: RollingInterval.Day) // Specify the file name and rolling interval
+    .CreateLogger();
+
+builder.Host.UseSerilog(); // Use Serilog for logging
+
 #endregion
 
 #region Configure Services
