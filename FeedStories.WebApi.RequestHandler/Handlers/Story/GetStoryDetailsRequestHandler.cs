@@ -18,7 +18,7 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
             _storyService = storyService;
         }
 
-        public override async Task<StoryDetailResponse> ProcessRequest(StoryDetailRequest request)
+        public override async Task<StoryDetailResponse?> ProcessRequest(StoryDetailRequest request)
         {
             _logger.LogDebug($"Called {nameof(GetStoryDetailsRequestHandler)} ProcessRequest({request.StoryId})");
 
@@ -30,9 +30,10 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
 
             var response = await _storyService.GetStoryDetails(validStoryId);
 
-            if (string.IsNullOrWhiteSpace(response?.Url))
+            if (string.IsNullOrEmpty(response?.Url))
             {
                 return null; 
+                //url is not present, returning nothing
             }
 
             response.StoryId = request.StoryId;

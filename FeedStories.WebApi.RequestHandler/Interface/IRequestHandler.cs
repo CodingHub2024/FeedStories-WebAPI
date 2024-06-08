@@ -9,6 +9,6 @@
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<TResponse> ProcessRequest(TRequest request);
+        Task<TResponse?> ProcessRequest(TRequest request);
     }
 }

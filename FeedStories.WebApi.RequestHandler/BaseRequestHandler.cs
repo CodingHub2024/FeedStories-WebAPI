@@ -19,6 +19,6 @@ namespace FeedStories.WebApi.RequestHandler
         {
             _logger = logger;
         }
-        public abstract Task<TResponse> ProcessRequest(TRequest request);
+        public abstract Task<TResponse?> ProcessRequest(TRequest request);
     }
 }
