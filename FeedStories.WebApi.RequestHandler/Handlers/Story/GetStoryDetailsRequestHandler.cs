@@ -2,7 +2,6 @@
 using FeedStories.WebApi.Contracts.Request;
 using FeedStories.WebApi.Contracts.Response;
 using Microsoft.Extensions.Logging;
-using System.Security.Cryptography;
 
 namespace FeedStories.WebApi.RequestHandler.Handlers
 {

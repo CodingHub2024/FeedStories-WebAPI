@@ -1,10 +1,5 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.DependencyInjection;
-using Polly;
+﻿using Polly;
 using Polly.Extensions.Http;
-using Polly.Caching;
-using Microsoft.Extensions.Configuration;
-using Polly.Caching.Memory;
 
 namespace FeedStories.Common.Utilities.Policies
 {
@@ -44,15 +39,5 @@ namespace FeedStories.Common.Utilities.Policies
             return Policy.TimeoutAsync<HttpResponseMessage>(timeout);
         }
 
-        public static IAsyncPolicy<HttpResponseMessage> GetCachPolicy(IServiceCollection services, IConfiguration configuration)
-        {
-            var memoryCache = services.BuildServiceProvider().GetRequiredService<IMemoryCache>();
-            var cacheProvider = new MemoryCacheProvider(memoryCache);
-
-            return Policy.CacheAsync<HttpResponseMessage>(
-                cacheProvider.AsyncFor<HttpResponseMessage>(),
-                TimeSpan.FromSeconds(30) // set short expiration time for live data
-            );
-        }
     }
 }
