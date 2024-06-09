@@ -27,9 +27,10 @@ namespace FeedStories.Common.Utilities.Services
             _cache = cache;
             _storyIdsURL = configuration["StoryURL:StoryIdsURL"];
             _storyDetailsBaseURL = configuration["StoryURL:StoryDetailsURL"];
-            _cacheExpiration = TimeSpan.FromMinutes(Convert.ToDouble(configuration["CacheTimeSpan"]));
+            _cacheExpiration = TimeSpan.FromMinutes(configuration.GetValue<double>("CacheTimeSpan"));
         }
 
+        
         /// <summary>
         /// GetStoryIds is used to get storyids
         /// </summary>
