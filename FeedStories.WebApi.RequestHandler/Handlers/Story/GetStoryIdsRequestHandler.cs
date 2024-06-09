@@ -2,7 +2,6 @@
 using FeedStories.WebApi.Contracts.Request;
 using FeedStories.WebApi.Contracts.Response;
 using Microsoft.Extensions.Logging;
-using System.Linq;
 
 namespace FeedStories.WebApi.RequestHandler.Handlers
 {
@@ -17,7 +16,7 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
             _storyService = storyService;
         }
 
-        public override async Task<StoryIdResponse> ProcessRequest(StoryIdRequest request)
+        public override async Task<StoryIdResponse?> ProcessRequest(StoryIdRequest request)
         {
             _logger.LogDebug($"Called {nameof(GetStoryIdsRequestHandler)} ProcessRequest");
 

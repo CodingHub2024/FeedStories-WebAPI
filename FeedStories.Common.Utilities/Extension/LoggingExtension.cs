@@ -4,12 +4,12 @@ using Serilog;
 
 public static class LoggingExtensions
 {
-    public static IHostBuilder AddSerilog(this IHostBuilder hostBuilder, IConfiguration configuration)
+    public static IHostBuilder AddSerilog(this IHostBuilder builder, IConfiguration configuration)
     {
         Log.Logger = new LoggerConfiguration()
             .ReadFrom.Configuration(configuration)
             .CreateLogger();
 
-        return hostBuilder.UseSerilog();
+        return builder.UseSerilog();
     }
 }

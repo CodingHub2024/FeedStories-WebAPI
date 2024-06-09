@@ -4,7 +4,6 @@ using FeedStories.WebApi.Contracts.Request;
 using FeedStories.WebApi.Contracts.Response;
 using FeedStories.WebApi.RequestHandler;
 using FeedStories.WebApi.RequestHandler.Handlers;
-using Serilog;
 
 #region Configuration
 var builder = WebApplication.CreateBuilder(args);
@@ -19,8 +18,9 @@ builder.Host.AddSerilog(configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddStoryService(configuration,configuration["BaseURI"]);
-
+builder.Services.AddStoryService(configuration);
+// Register IMemoryCache
+builder.Services.AddMemoryCache();
 #endregion
 
 #region Configure CORS

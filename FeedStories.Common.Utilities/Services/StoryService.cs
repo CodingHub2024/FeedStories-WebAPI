@@ -15,38 +15,30 @@ namespace FeedStories.Common.Utilities.Services
         private readonly HttpClient _httpClient;
         private readonly ILogger<StoryService> _logger;
         private readonly IMemoryCache _cache;
-        private readonly TimeSpan _cacheExpiration = TimeSpan.FromMinutes(30);
-        private readonly string? _storyDetailsBaseURL = string.Empty;
-        private readonly string? _storyIdsURL = string.Empty;
+        private readonly TimeSpan _cacheExpiration;
+        private readonly string? _storyDetailsBaseURL;
+        private readonly string? _storyIdsURL;
 
-        public StoryService(HttpClient httpClient, IConfiguration configuration, IMemoryCache cache, ILogger<StoryService> logger)
+        public StoryService(HttpClient httpClient, IConfiguration configuration, IMemoryCache cache,
+            ILogger<StoryService> logger)
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             _logger = logger;
             _cache = cache;
             _storyIdsURL = configuration["StoryURL:StoryIdsURL"];
             _storyDetailsBaseURL = configuration["StoryURL:StoryDetailsURL"];
-            _cacheExpiration = TimeSpan.FromMinutes(30);
+            _cacheExpiration = TimeSpan.FromMinutes(Convert.ToDouble(configuration["CacheTimeSpan"]));
         }
 
         /// <summary>
         /// GetStoryIds is used to get storyids
         /// </summary>
-        /// <param name="url"></param>
         /// <returns></returns>
         public async Task<List<int>> GetStoryIds()
         {
-            HttpResponseMessage? response = null;
-            try
-            {
-                response = await _httpClient.GetAsync(_storyIdsURL);
-                response.EnsureSuccessStatusCode();
-                return await response.Content.ReadFromJsonAsync<List<int>>();
-            }
-            finally
-            {
-                response?.Dispose();
-            }
+            HttpResponseMessage? response = await _httpClient.GetAsync(_storyIdsURL);
+            response.EnsureSuccessStatusCode();
+            return await response?.Content?.ReadFromJsonAsync<List<int>>();
         }
 
         /// <summary>
@@ -63,12 +55,13 @@ namespace FeedStories.Common.Utilities.Services
                 _logger.LogDebug($"Cache miss for story ID {storyId}. Fetching from external service...");
 
                 var storyDetailsURL = _storyDetailsBaseURL;
-                storyDetailsURL = storyDetailsURL?.Replace("@id", Uri.EscapeDataString(storyId.ToString()));
 
                 if (string.IsNullOrWhiteSpace(storyDetailsURL))
                 {
                     throw new InvalidOperationException("Story details URL template is not configured.");
                 }
+                
+                storyDetailsURL = storyDetailsURL?.Replace("@id", Uri.EscapeDataString(storyId.ToString()));
 
                 var response = await _httpClient.GetAsync(storyDetailsURL);
                 response.EnsureSuccessStatusCode();

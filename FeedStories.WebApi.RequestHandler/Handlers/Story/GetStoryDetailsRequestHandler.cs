@@ -28,14 +28,8 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
             }
 
             var response = await _storyService.GetStoryDetails(validStoryId);
-
-            if (string.IsNullOrEmpty(response?.Url))
-            {
-                return null; 
-                //url is not present, returning nothing
-            }
-
             response.StoryId = request.StoryId;
+            
             return response;
         }
     }
