@@ -28,8 +28,12 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
             }
 
             var response = await _storyService.GetStoryDetails(validStoryId);
-            response.StoryId = request.StoryId;
-            
+
+            if (response != null)
+            {
+                response.StoryId = request.StoryId;
+            }
+
             return response;
         }
     }
