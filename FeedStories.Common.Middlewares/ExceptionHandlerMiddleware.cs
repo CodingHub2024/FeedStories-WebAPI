@@ -2,6 +2,7 @@
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
+using FeedStories.Common.Utilities;
 
 namespace FeedStories.Common.Middlewares
 {
@@ -23,6 +24,19 @@ namespace FeedStories.Common.Middlewares
             try
             {
                 await _next(context);
+            }
+            catch (ApiException exception)
+            {
+                _logger.LogError(exception, $"ApiException Error {exception.Message}");
+
+                var result = JsonSerializer.Serialize(new
+                {
+                    ErrorCode = exception.ErrorCode,
+                    ErrorMessage = exception.ErrorMessage,
+                });
+
+                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                await SendResponse(context, result);
             }
             catch (Exception exception)
             {

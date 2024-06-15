@@ -21,13 +21,7 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
         {
             _logger.LogDebug($"Called {nameof(GetStoryDetailsRequestHandler)} ProcessRequest({request.StoryId})");
 
-            // Validate and sanitize storyId
-            if (!int.TryParse(request.StoryId.ToString(), out int validStoryId))
-            {
-                throw new ArgumentException("Invalid story ID");
-            }
-
-            var response = await _storyService.GetStoryDetails(validStoryId);
+            var response = await _storyService.GetStoryDetails(request.StoryId);
 
             if (response != null)
             {

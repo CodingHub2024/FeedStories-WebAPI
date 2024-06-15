@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FeedStories.Common.Filters\FeedStories.Common.Filters.csproj" />
     <ProjectReference Include="..\FeedStories.Common.Middlewares\FeedStories.Common.Middlewares.csproj" />
     <ProjectReference Include="..\FeedStories.Common.Utilities\FeedStories.Common.Utilities.csproj" />
     <ProjectReference Include="..\FeedStories.WebApi.Contracts\FeedStories.WebApi.Contracts.csproj" />

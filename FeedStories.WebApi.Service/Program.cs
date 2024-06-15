@@ -4,6 +4,7 @@ using FeedStories.WebApi.Contracts.Request;
 using FeedStories.WebApi.Contracts.Response;
 using FeedStories.WebApi.RequestHandler;
 using FeedStories.WebApi.RequestHandler.Handlers;
+using FeedStories.Common.Filters;
 
 #region Configuration
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +16,7 @@ builder.Host.AddSerilog(configuration);
 #endregion
 
 #region Configure Services
-builder.Services.AddControllers();
+builder.Services.ValidateModels();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddStoryService(configuration);
