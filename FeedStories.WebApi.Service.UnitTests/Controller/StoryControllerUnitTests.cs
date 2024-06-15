@@ -2,12 +2,12 @@
 using FeedStories.WebApi.Contracts.Request;
 using FeedStories.WebApi.Contracts.Response;
 using FeedStories.WebApi.RequestHandler;
-using FeedStories.WebApi.Service.Controllers;
+using FeedStories.WebApi.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 
-namespace FeedStories.WebApi.Service.UnitTests.Controller
+namespace FeedStories.WebApi.UnitTests.Controller
 {
     [TestClass]
     public class StoryControllerUnitTests

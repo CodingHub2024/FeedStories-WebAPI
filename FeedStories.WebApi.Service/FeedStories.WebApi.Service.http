@@ -1,6 +1,6 @@
-@FeedStories.WebApi.Service_HostAddress = http://localhost:5032
+@FeedStories.WebApi_HostAddress = http://localhost:5032
 
-GET {{FeedStories.WebApi.Service_HostAddress}}/weatherforecast/
+GET {{FeedStories.WebApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

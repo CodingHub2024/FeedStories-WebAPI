@@ -1,7 +1,7 @@
 ﻿using FeedStories.WebApi.RequestHandler;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FeedStories.WebApi.Service.Controllers
+namespace FeedStories.WebApi.Controllers
 {
     /// <summary>
     /// Basecontroller class

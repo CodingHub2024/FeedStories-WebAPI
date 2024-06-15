@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedStories.Common.TestData
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedStories.WebApi.RequestHandler.UnitTests", "FeedStories.WebApi.RequestHandler.UnitTests\FeedStories.WebApi.RequestHandler.UnitTests.csproj", "{9F1A062D-F9B0-4B27-B38E-31CF01F8CC2D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedStories.WebApi.Service.UnitTests", "FeedStories.WebApi.Service.UnitTests\FeedStories.WebApi.Service.UnitTests.csproj", "{C40165FC-23F9-4FEF-B733-8FA403519CB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedStories.WebApi.UnitTests", "FeedStories.WebApi.Service.UnitTests\FeedStories.WebApi.UnitTests.csproj", "{C40165FC-23F9-4FEF-B733-8FA403519CB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

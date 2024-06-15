@@ -3,7 +3,7 @@ using FeedStories.WebApi.Contracts.Response;
 using FeedStories.WebApi.RequestHandler;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FeedStories.WebApi.Service.Controllers
+namespace FeedStories.WebApi.Controllers
 {
     [Route("api/[controller]")]
     public class StoryController : BaseController
