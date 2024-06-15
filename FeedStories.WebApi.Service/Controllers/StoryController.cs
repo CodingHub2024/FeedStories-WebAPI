@@ -8,8 +8,7 @@ namespace FeedStories.WebApi.Service.Controllers
     [Route("api/[controller]")]
     public class StoryController : BaseController
     {
-        public StoryController(IRequestHandlerFactory requestHandlerFactory) : base(requestHandlerFactory)
-        { }
+        public StoryController(IRequestHandlerFactory requestHandlerFactory) : base(requestHandlerFactory) {}
 
         /// <summary>
         /// GetStoryIds method is used to get story ids

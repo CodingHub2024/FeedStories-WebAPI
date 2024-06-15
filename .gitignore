@@ -157,3 +157,10 @@ FeedStories.WebApi.Service.csproj.nuget.g.targets
 /.vs/ProjectEvaluation/feedstories.metadata.v7.bin
 /.vs/ProjectEvaluation/feedstories.projects.v7.bin
 /.vs/FeedStories/FileContentIndex/*.vsidx
+/.vs/FeedStories/v17/TestStore/0/000.testlog
+/.vs/FeedStories/v17/TestStore/0/testlog.manifest
+/FeedStories.WebApi.Service/logs/FeedStories20240609.log
+/FeedStories.WebApi.Service/logs/FeedStories20240610.log
+/FeedStories.WebApi.Service/logs/FeedStories20240612.log
+/FeedStories.WebApi.Service/logs/FeedStories20240613.log
+/FeedStories.WebApi.Service/logs/FeedStories20240614.log
