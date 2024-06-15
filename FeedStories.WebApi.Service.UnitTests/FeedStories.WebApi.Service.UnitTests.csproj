@@ -20,7 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FeedStories.Common.TestData\FeedStories.Common.TestData.csproj" />
     <ProjectReference Include="..\FeedStories.WebApi.RequestHandler\FeedStories.WebApi.RequestHandler.csproj" />
-    <ProjectReference Include="..\FeedStories.WebApi.Service\FeedStories.WebApi.Service.csproj" />
+    <ProjectReference Include="..\FeedStories.WebApi.Service\FeedStories.WebApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>

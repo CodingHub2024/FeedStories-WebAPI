@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedStories.WebApi.Contract
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedStories.Common.Utilities", "FeedStories.Common.Utilities\FeedStories.Common.Utilities.csproj", "{8996B8CE-EA02-42E6-965F-B19F56B075D7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedStories.WebApi.Service", "FeedStories.WebApi.Service\FeedStories.WebApi.Service.csproj", "{46FDFF57-EF2B-40A4-BE23-054052F98623}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedStories.WebApi", "FeedStories.WebApi.Service\FeedStories.WebApi.csproj", "{46FDFF57-EF2B-40A4-BE23-054052F98623}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedStories.Common.Middlewares", "FeedStories.Common.Middlewares\FeedStories.Common.Middlewares.csproj", "{0CCEDF86-6A4C-46EA-9DB6-F54EB7BB1002}"
 EndProject
