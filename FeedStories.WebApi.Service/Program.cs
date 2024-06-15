@@ -16,6 +16,7 @@ builder.Host.AddSerilog(configuration);
 #endregion
 
 #region Configure Services
+builder.Services.AddControllers();
 builder.Services.ValidateModels();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -37,9 +38,9 @@ builder.Services.AddCors(options =>
 #endregion
 
 #region Configure Services of RequestHandler
-builder.Services.AddSingleton<IRequestHandlerFactory, RequestHandlerFactory>();
-builder.Services.AddSingleton<IRequestHandler<StoryIdRequest, StoryIdResponse>, GetStoryIdsRequestHandler>();
-builder.Services.AddSingleton<IRequestHandler<StoryDetailRequest, StoryDetailResponse>, GetStoryDetailsRequestHandler>();
+builder.Services.AddScoped<IRequestHandlerFactory, RequestHandlerFactory>();
+builder.Services.AddScoped<IRequestHandler<StoryIdRequest, StoryIdResponse>, GetStoryIdsRequestHandler>();
+builder.Services.AddScoped<IRequestHandler<StoryDetailRequest, StoryDetailResponse>, GetStoryDetailsRequestHandler>();
 #endregion
 
 #region Configure Request Processing Pipeline

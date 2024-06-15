@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FeedStories.WebApi.Controllers
 {
     /// <summary>
-    /// Basecontroller class
+    /// Basecontroller class for all other controllers
     /// </summary>
     public class BaseController : Controller
     {

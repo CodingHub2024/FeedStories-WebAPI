@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace FeedStories.Common.Filters
 {
+    /// <summary>
+    /// Action filter for checking the model states and sending bad request if required
+    /// </summary>
     public class ValidationModelFilter : IAsyncActionFilter
     {
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
