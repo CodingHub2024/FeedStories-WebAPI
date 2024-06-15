@@ -164,3 +164,5 @@ FeedStories.WebApi.Service.csproj.nuget.g.targets
 /FeedStories.WebApi.Service/logs/FeedStories20240612.log
 /FeedStories.WebApi.Service/logs/FeedStories20240613.log
 /FeedStories.WebApi.Service/logs/FeedStories20240614.log
+/.vs/FeedStories/v17/TestStore/0/001.testlog
+/FeedStories.WebApi.Service/logs/FeedStories20240615.log

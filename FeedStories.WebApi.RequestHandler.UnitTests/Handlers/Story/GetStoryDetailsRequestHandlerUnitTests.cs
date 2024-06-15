@@ -17,14 +17,14 @@ namespace FeedStories.WebApi.RequestHandler.UnitTests
         public void ProcessRequest_Returns_StoryDetailsLis()
         {
             //Arrange
-            _storyService.GetStoryDetails(Arg.Any<int>()).Returns(StoryTestData.storyDetailResponse);
+            _storyService.GetStoryDetails(Arg.Any<int>()).Returns(StoryTestData.StoryDetailResponse);
             var getStoryDetailsRequestHandler = new GetStoryDetailsRequestHandler(_logger, _storyService);
             
             //Act
-            var task = getStoryDetailsRequestHandler.ProcessRequest(StoryTestData.storyDetailRequest);
+            var task = getStoryDetailsRequestHandler.ProcessRequest(StoryTestData.StoryDetailRequest);
 
             //Assert
-            Assert.AreEqual(StoryTestData.storyDetailResponse, task.Result);
+            Assert.AreEqual(StoryTestData.StoryDetailResponse, task.Result);
         }
     }
 }
