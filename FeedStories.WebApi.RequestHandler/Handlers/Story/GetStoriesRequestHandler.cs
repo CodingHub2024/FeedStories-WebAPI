@@ -29,7 +29,7 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
             return new StoryResponse
             {
                 // Wait for all tasks to complete
-                StoryDetails = await Task.WhenAll(detailTasks),
+                Stories = await Task.WhenAll(detailTasks),
                 TotalElements = StoryIds.Count()
             };
 

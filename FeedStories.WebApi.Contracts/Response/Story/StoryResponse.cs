@@ -3,6 +3,6 @@
     public class StoryResponse
     {
         public int TotalElements { get; set; }
-        public StoryDetailResponse[]? StoryDetails { get; set; }
+        public StoryDetailResponse[]? Stories { get; set; }
     }
 }

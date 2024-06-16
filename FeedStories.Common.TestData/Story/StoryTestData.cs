@@ -10,7 +10,7 @@ namespace FeedStories.Common.TestData
         public static StoryRequest StoryRequest = new StoryRequest { PageNumber = 0,PageSize =20 };
         public static StoryDetailResponse StoryDetailResponse = new StoryDetailResponse { StoryId = 1, Title = "title", Url = "https:\\localhost:4200" };
         public static StoryRequest StoryIdRequest = new StoryRequest { PageNumber = 1, PageSize = 20 };
-        public static StoryResponse StoryIdResponse = new StoryResponse { StoryDetails = [ new StoryDetailResponse { StoryId = 1, Title = "test", Url = "testURL" } ],TotalElements =500};
+        public static StoryResponse StoryIdResponse = new StoryResponse { Stories = [ new StoryDetailResponse { StoryId = 1, Title = "test", Url = "testURL" } ],TotalElements =500};
         public static Exception TestException = new ("Test exception");
         public static MemoryStream StoryResponseBodyStream = new();
         public static string StoryExpectedResponse = JsonSerializer.Serialize(new
