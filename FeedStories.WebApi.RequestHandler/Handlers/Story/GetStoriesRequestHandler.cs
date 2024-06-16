@@ -25,11 +25,15 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
             // Create a list of story fetching tasks to fetch details concurrently
             var detailTasks = StoryIds.Skip(request.PageNumber * request.PageSize).Take(request.PageSize)
                 .Select(storyId => GetStoryDetails(storyId)).ToList();
-            
+
+            var storyDetails = await Task.WhenAll(detailTasks);
+
+            var stories = storyDetails.Where(details => details != null).ToArray();
+
             return new StoryResponse
             {
                 // Wait for all tasks to complete
-                Stories = await Task.WhenAll(detailTasks),
+                Stories = stories,
                 TotalElements = StoryIds.Count()
             };
 
