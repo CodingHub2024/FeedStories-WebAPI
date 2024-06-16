@@ -39,8 +39,7 @@ builder.Services.AddCors(options =>
 
 #region Configure Services of RequestHandler
 builder.Services.AddScoped<IRequestHandlerFactory, RequestHandlerFactory>();
-builder.Services.AddScoped<IRequestHandler<StoryIdRequest, StoryIdResponse>, GetStoryIdsRequestHandler>();
-builder.Services.AddScoped<IRequestHandler<StoryDetailRequest, StoryDetailResponse>, GetStoryDetailsRequestHandler>();
+builder.Services.AddScoped<IRequestHandler<StoryRequest, StoryResponse>, GetStoriesRequestHandler>();
 #endregion
 
 #region Configure Request Processing Pipeline

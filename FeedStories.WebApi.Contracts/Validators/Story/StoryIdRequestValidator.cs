@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace FeedStories.WebApi.Contracts.Validators.Story
 {
-    public class StoryIdRequestValidator : AbstractValidator<StoryIdRequest>
+    public class StoryIdRequestValidator : AbstractValidator<StoryRequest>
     {
         public StoryIdRequestValidator()
         {
