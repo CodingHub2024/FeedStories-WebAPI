@@ -43,7 +43,7 @@ namespace FeedStories.WebApi.RequestHandler.UnitTests
             var task = getStoryDetailsRequestHandler.ProcessRequest(StoryTestData.StoryRequest);
 
             //Assert
-            Assert.AreEqual(StoryTestData.StoryCount, task.Result.Stories.Length);
+            Assert.AreEqual(StoryTestData.StoryCount, task.Result.Stories.Count());
         }
 
 
