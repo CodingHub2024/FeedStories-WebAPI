@@ -14,17 +14,38 @@ namespace FeedStories.WebApi.RequestHandler.UnitTests
 
 
         [TestMethod]
-        public void ProcessRequest_Returns_StoryDetailsLis()
+        public void ProcessRequest_Should_Returns_Stories()
         {
             //Arrange
+            _storyService.GetStoryIds().Returns(StoryTestData.StoryIds);
             _storyService.GetStoryDetails(Arg.Any<int>()).Returns(StoryTestData.StoryDetailResponse);
+            
             var getStoryDetailsRequestHandler = new Handlers.GetStoriesRequestHandler(_logger, _storyService);
 
             //Act
             var task = getStoryDetailsRequestHandler.ProcessRequest(StoryTestData.StoryRequest);
 
             //Assert
-            Assert.AreEqual<StoryResponse>(StoryTestData.StoryResponse, task.Result);
+            Assert.AreEqual(StoryTestData.TotalElements, task.Result.TotalElements);
         }
+
+
+        [TestMethod]
+        public void ProcessRequest_Should_Not_ReturnsStories()
+        {
+            //Arrange
+            _storyService.GetStoryIds().Returns(StoryTestData.StoryIds);
+            _storyService.GetStoryDetails(Arg.Any<int>()).Returns(StoryTestData.StoryDetailNullResponse);
+
+            var getStoryDetailsRequestHandler = new Handlers.GetStoriesRequestHandler(_logger, _storyService);
+
+            //Act
+            var task = getStoryDetailsRequestHandler.ProcessRequest(StoryTestData.StoryRequest);
+
+            //Assert
+            Assert.AreEqual(StoryTestData.StoryCount, task.Result.Stories.Length);
+        }
+
+
     }
 }

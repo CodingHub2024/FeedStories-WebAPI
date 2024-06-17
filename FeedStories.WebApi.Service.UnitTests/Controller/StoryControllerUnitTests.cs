@@ -23,7 +23,7 @@ namespace FeedStories.WebApi.UnitTests.Controller
             var storyController = new StoryController(requestHandlerFactory);
 
             //Act
-            var result = storyController.GetStories(StoryTestData.StoryIdRequest).Result as OkObjectResult;
+            var result = storyController.GetStories(StoryTestData.StoryRequest).Result as OkObjectResult;
 
             //Assert
             Assert.IsNotNull(result);
@@ -39,7 +39,7 @@ namespace FeedStories.WebApi.UnitTests.Controller
             var storyController = new StoryController(requestHandlerFactory);
 
             //Act
-            var task = storyController.GetStories(StoryTestData.StoryIdRequest);
+            var task = storyController.GetStories(StoryTestData.StoryRequest);
 
             //Assert
             Assert.IsNotNull(task.Exception);

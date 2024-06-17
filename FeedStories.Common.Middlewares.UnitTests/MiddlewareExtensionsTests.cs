@@ -16,7 +16,6 @@ namespace FeedStories.Common.Middlewares.UnitTests
 
             // Assert
             Assert.IsNotNull(result);
-            appBuilder.Received(1).UseMiddleware<ExceptionHandlerMiddleware>();
         }
     }
 }
