@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 namespace FeedStories.WebApi.RequestHandler.Handlers
 {
     /// <summary>
-    /// Request handler for getting feed story ids
+    /// Request handler for getting feed stories for current requested page
     /// </summary>
     public class GetStoriesRequestHandler : BaseRequestHandler<StoryRequest, StoryResponse, GetStoriesRequestHandler>
     {

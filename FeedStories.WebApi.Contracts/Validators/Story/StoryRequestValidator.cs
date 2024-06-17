@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace FeedStories.WebApi.Contracts.Validators.Story
 {
-    public class StoryIdRequestValidator : AbstractValidator<StoryRequest>
+    public class StoryRequestValidator : AbstractValidator<StoryRequest>
     {
-        public StoryIdRequestValidator()
+        public StoryRequestValidator()
         {
             RuleFor(x => x.PageNumber).GreaterThanOrEqualTo(0)
                                    .WithMessage("PageNumber must be greater than or equal to 0");

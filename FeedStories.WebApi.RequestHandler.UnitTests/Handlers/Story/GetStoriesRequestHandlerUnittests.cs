@@ -1,5 +1,6 @@
 ﻿using FeedStories.Common.TestData;
 using FeedStories.Common.Utilities.Interface;
+using FeedStories.WebApi.Contracts.Response;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 
@@ -12,18 +13,18 @@ namespace FeedStories.WebApi.RequestHandler.UnitTests
         private readonly IStoryService _storyService = Substitute.For<IStoryService>();
 
 
-        //[TestMethod]
-        //public void ProcessRequest_Returns_StoryDetailsLis()
-        //{
-        //    //Arrange
-        //    _storyService.GetStoryDetails(Arg.Any<int>()).Returns(StoryTestData.StoryDetailResponse);
-        //    var getStoryDetailsRequestHandler = new Handlers.GetStoriesRequestHandler(_logger, _storyService);
-            
-        //    //Act
-        //    var task = getStoryDetailsRequestHandler.ProcessRequest(StoryTestData.StoriesResponse);
+        [TestMethod]
+        public void ProcessRequest_Returns_StoryDetailsLis()
+        {
+            //Arrange
+            _storyService.GetStoryDetails(Arg.Any<int>()).Returns(StoryTestData.StoryDetailResponse);
+            var getStoryDetailsRequestHandler = new Handlers.GetStoriesRequestHandler(_logger, _storyService);
 
-        //    //Assert
-        //    Assert.AreEqual(StoryTestData.StoryDetailResponse, task.Result);
-        //}
+            //Act
+            var task = getStoryDetailsRequestHandler.ProcessRequest(StoryTestData.StoryRequest);
+
+            //Assert
+            Assert.AreEqual<StoryResponse>(StoryTestData.StoryResponse, task.Result);
+        }
     }
 }
