@@ -19,7 +19,7 @@ namespace FeedStories.Common.TestData
         public static List<int> StoryIds = new List<int> { 1, 2 };
 
         public static StoryDetailResponse StoryDetailResponse = new StoryDetailResponse { StoryId = 1, Title = "title", Url = "https:\\localhost:4200" };
-        public static StoryDetailResponse StoryDetailNullResponse = null;
+        public static StoryDetailResponse? StoryDetailNullResponse = null;
         public static int TotalElements = 2;
         public static int StoryCount = 0;
     }

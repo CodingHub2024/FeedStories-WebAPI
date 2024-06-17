@@ -3,6 +3,6 @@
     public class StoryResponse
     {
         public int TotalElements { get; set; }
-        public IEnumerable<StoryDetailResponse>? Stories { get; set; }
+        public IEnumerable<StoryDetailResponse?>? Stories { get; set; }
     }
 }

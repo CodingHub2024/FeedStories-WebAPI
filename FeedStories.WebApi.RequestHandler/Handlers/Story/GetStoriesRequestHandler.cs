@@ -22,7 +22,7 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
 
             var pageNumber = request.PageNumber;
             var pageSize = request.PageSize;
-            var filteredStoryDetails = new List<StoryDetailResponse>();
+            var filteredStoryDetails = new List<StoryDetailResponse?>();
 
             var StoryIds = await _storyService.GetStoryIds();
 
