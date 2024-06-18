@@ -22,11 +22,11 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
 
             var pageNumber = request.PageNumber;
             var pageSize = request.PageSize;
-            var filteredStoryDetails = new List<StoryDetailResponse?>();
+            var filteredStories = new List<StoryDetailResponse?>();
 
             var StoryIds = await _storyService.GetStoryIds();
 
-            while (filteredStoryDetails.Count < pageSize)
+            while (filteredStories.Count < pageSize)
             {
                 var storyIdsToFetch = StoryIds.Skip(pageNumber * pageSize).Take(pageSize);
 
@@ -37,11 +37,11 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
                 }
 
                 // Fetch details concurrently
-                var detailTasks = storyIdsToFetch.Select(storyId => GetStoryDetails(storyId));
-                var storyDetails = await Task.WhenAll(detailTasks);
+                var storyTasks = storyIdsToFetch.Select(storyId => GetStoryDetails(storyId));
+                var stories = await Task.WhenAll(storyTasks);
 
                 // Filter out null results and add to the final list
-                filteredStoryDetails.AddRange(storyDetails.Where(details => details != null));
+                filteredStories.AddRange(stories.Where(details => details != null));
 
                 // Move to the next page
                 pageNumber++;
@@ -50,7 +50,7 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
             return new StoryResponse
             {
                 // Wait for all tasks to complete
-                Stories = filteredStoryDetails.Take(pageSize),
+                Stories = filteredStories.Take(pageSize),
                 TotalElements = StoryIds.Count()
             };
 
