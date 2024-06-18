@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
+using FeedStories.WebApi.Contracts.Validators;
+using FluentValidation;
+using FeedStories.WebApi.Contracts.Request;
 
 namespace FeedStories.Common.Filters
 {
@@ -10,8 +13,8 @@ namespace FeedStories.Common.Filters
     {
         public static void ValidateModels(this IServiceCollection services)
         {
-            services.AddFluentValidationAutoValidation();
-            services.AddControllersWithViews(options =>
+            services.AddControllers().AddFluentValidation(v => v.RegisterValidatorsFromAssemblyContaining<StoryRequestValidator>());
+            services.AddControllers(options =>
             {
                 options.Filters.Add<ValidationModelFilter>();
             });

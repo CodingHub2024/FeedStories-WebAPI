@@ -15,7 +15,8 @@ namespace FeedStories.Common.Filters
             if(!context.ModelState.IsValid)
             {
                 context.Result = new BadRequestObjectResult(context.ModelState);
-                throw new ApiException(ErrorCodes.BadRequest);
+                var errors = context.ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).FirstOrDefault();
+                throw new ApiException(ErrorCodes.BadRequest, errors);
             }
             await next();
         }

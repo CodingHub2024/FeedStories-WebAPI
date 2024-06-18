@@ -1,7 +1,7 @@
 ﻿using FeedStories.WebApi.Contracts.Request;
 using FluentValidation;
 
-namespace FeedStories.WebApi.Contracts.Validators.Story
+namespace FeedStories.WebApi.Contracts.Validators
 {
     public class StoryRequestValidator : AbstractValidator<StoryRequest>
     {
