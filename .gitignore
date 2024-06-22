@@ -1,7 +1,7 @@
 /.vs/FeedStories/DesignTimeBuild/.dtbcache.v2
 /.vs/FeedStories/FileContentIndex/098b60cf-9b26-4a55-b0be-49e537c785dd.vsidx
 /.vs/FeedStories/config/applicationhost.config
-/.vs/FeedStories/v17/.suo
+
 /.vs/FeedStories/v17/DocumentLayout.json
 /FeedStories.Common.Utilities/obj/Debug/net8.0/FeedStories.Common.Utilities.sourcelink.json
 /FeedStories.WebApi.Contracts/obj/Debug/net8.0/FeedStories.WebApi.Contracts.sourcelink.json
@@ -167,3 +167,4 @@ FeedStories.WebApi.Service.csproj.nuget.g.targets
 /.vs/FeedStories/v17/TestStore/0/001.testlog
 /FeedStories.WebApi.Service/logs/FeedStories20240615.log
 /.vs/FeedStories/v17/TestStore/0/003.testlog
+/Directory.Build.props
