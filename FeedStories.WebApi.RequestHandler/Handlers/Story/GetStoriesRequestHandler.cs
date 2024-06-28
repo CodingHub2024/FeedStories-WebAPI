@@ -24,7 +24,7 @@ namespace FeedStories.WebApi.RequestHandler.Handlers
             var pageSize = request.PageSize;
             var filteredStories = new List<StoryDetailResponse?>();
 
-            var StoryIds = await _storyService.GetStoryIds();
+            var StoryIds = (await _storyService.GetStoryIds()).Take(200);
 
             while (filteredStories.Count < pageSize)
             {
