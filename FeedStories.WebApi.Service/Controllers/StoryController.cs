@@ -21,6 +21,13 @@ namespace FeedStories.WebApi.Controllers
         {
             return Ok(await HandlerFactory.ProcessRequest<StoryRequest, StoryResponse>(request));
         }
-        
+
+        [HttpGet("GetDetails")]
+        public IActionResult GetDetails()
+        {
+            return Ok("anurag");
+        }
+
+
     }
 }
